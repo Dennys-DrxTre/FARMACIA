@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Notificaciones del ALMACENISTA</title>
+</head>
+<body>
+    <h1>Notificaciones del ALMACENISTA</h1>
+    <ul>
+        {% for notificacion in notificaciones %}
+        <li>{{ notificacion.mensaje }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

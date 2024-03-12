@@ -1,0 +1,60 @@
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button title="Cerrar" aria-label="Cerrar" class="close" type="button" onclick="cerrar_modal_creacionSolicitud();">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h2 class="modal-title">Registrar Solicitud</h2>
+    </div>
+    <form id="form_creacionSolicitud" action="{% url 'registrar_Solicitud' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="modal-body">
+
+        <p>
+          {{ form.cod_pac.label }}
+          <div oncopy="return false" onpaste="return false" oncut="return false">{{ form.cod_pac }}</div>
+          <div class="alert alert-danger error-cod_pac d-none"></div>
+        </p>
+
+        <p>
+          {{ form.descripcion_soli.label }}
+          <div oncopy="return false" onpaste="return false" oncut="return false">{{ form.descripcion_soli }}</div>
+          <div class="alert alert-danger error-descripcion_soli d-none"></div>
+        </p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for producto in form.id_producto %}
+            <tr>
+              <td>{{ producto }}</td>
+              <td><input type="number" name="cantidad_{{ forloop.counter0 }}" class="form-control" placeholder="Cantidad del Producto" required></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <p>
+          {{ form.recipe.label }}
+          <div oncopy="return false" onpaste="return false" oncut="return false">{{ form.recipe }}</div>
+          <div class="alert alert-danger error-recipe d-none"></div>
+        </p>
+
+        <p>
+          <div oncopy="return false" onpaste="return false" oncut="return false">{{ form.estado }}</div>
+          <div class="alert alert-danger error-estado d-none"></div>
+        </p>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" type="button" onclick="cerrar_modal_creacionSolicitud();">Cancelar</button>
+        <button id="boton_creacion" class="btn btn-primary" type="button" onclick="registrarSolicitud();">Confirmar</button>
+      </div>
+    </form>
+  </div>
+</div>
